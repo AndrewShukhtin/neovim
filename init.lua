@@ -1,4 +1,6 @@
-require('nvim-tree')
 require('plugins')
 require('options')
 require('keymaps')
+--require('nvim-tree')
+require('lsp')
+-- require('nvim-cmp')

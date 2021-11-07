@@ -19,7 +19,6 @@ if fn.empty(fn.glob(packer_install_dir)) > 0 then
   execute 'packadd packer.nvim'
 end
 
-
 -- vim.cmd [[packadd packer.vim]]
 
 return require('packer').startup(function()
@@ -40,12 +39,44 @@ return require('packer').startup(function()
     requires = { {'nvim-lua/plenary.nvim'} },
     config = function() require'telescope'.setup {} end
   }
-
+  
   use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
+    'ms-jpq/chadtree', branch = 'chad',
+    run = 'python3 -m chadtree deps',
     config = function()
-      require'nvim-tree'.setup {}
+      local map = vim.api.nvim_set_keymap
+      local default_opts = { noremap = true, silent = true }
+      map('n', '<leader>n', ':CHADopen<CR>', default_opts)
     end
+  }
+  use {
+    'neovim/nvim-lspconfig'
+  }
+  use {
+    'hrsh7th/nvim-cmp', -- Autocompletion plugin
+    requires = {
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-nvim-lua' },
+      { 'hrsh7th/cmp-vsnip' },
+      { 'hrsh7th/vim-vsnip' },
+    }
+  }
+  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use 'fatih/vim-go'
+  use {
+  'nvim-lualine/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    config = function() require'lualine'.setup {} end,
+  }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    config = function() require'nvim-treesitter.configs'.setup {
+      ensure_installed = "maintained",
+      highlight = {
+        enable = true,
+      }
+    } end
   }
 end)

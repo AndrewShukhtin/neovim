@@ -17,5 +17,3 @@ map('n', 't]', ':tabprev<CR>', default_opts)
 map('c', 't]', ':tabprev<CR>', default_opts)
 
 map('n', 'ps', ":lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For >  \" )})<CR>", default_opts)
-
-map('n', '<C-n>', ':NvimTreeToggle<CR>', default_opts)
