@@ -19,4 +19,5 @@ map('c', '<leader>[', ':tabprev<CR>', default_opts)
 map('n', 'ps', ":lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For >  \" )})<CR>", default_opts)
 
 map('i', '<S-TAB>', '<C-d>', default_opts)
+map('v', '<S-TAB>', '<<', default_opts)
 

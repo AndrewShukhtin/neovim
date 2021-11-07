@@ -1,4 +1,6 @@
-require'lspconfig'.gopls.setup{}
+-- ===================================
+-- ++++++++++++ CMP-LSP ++++++++++++++
+-- ===================================
 
 local nvim_lsp = require('lspconfig')
 
@@ -38,19 +40,6 @@ end
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'gopls' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -107,6 +96,10 @@ cmp.setup {
   },
 }
 
+-- ===============================================
+-- ++++++++++++++++ GO +++++++++++++++++++++++++++
+-- ===============================================
+
 function goimports(timeout_ms)
     local context = { only = { "source.organizeImports" } }
     vim.validate { context = { context, "t", true } }
@@ -143,35 +136,10 @@ vim.api.nvim_command([[autocmd BufWritePre *.go lua goimports(1000)]])
 -- ==============================================
 -- ++++++++++++++++++ LUA +++++++++++++++++++++++
 -- ==============================================
-local system_name
-if vim.fn.has("mac") == 1 then
-  system_name = "macOS"
-elseif vim.fn.has("unix") == 1 then
-  system_name = "Linux"
-elseif vim.fn.has('win32') == 1 then
-  system_name = "Windows"
-else
-  print("Unsupported system for sumneko")
-end
-
--- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-local sumneko_root_path = vim.fn.stdpath('config')..'/lua-language-server'
-local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
-
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-require'lspconfig'.sumneko_lua.setup {
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+--
+local lua_config = {
   settings = {
     Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
         globals = {'vim'},
@@ -187,3 +155,20 @@ require'lspconfig'.sumneko_lua.setup {
     },
   },
 }
+
+-- LSP settings
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
+    local opts = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      flags = {
+        debounce_text_changes = 150,
+      }
+    }
+    if server.name == "sumneko_lua" then
+        -- only apply these settings for the "sumneko_lua" server
+        opts.settings = lua_config.settings 
+    end
+    server:setup(opts)
+end)
