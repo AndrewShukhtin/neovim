@@ -43,11 +43,6 @@ return require('packer').startup(function()
   use {
     'ms-jpq/chadtree', branch = 'chad',
     run = 'python3 -m chadtree deps',
-    config = function()
-      local map = vim.api.nvim_set_keymap
-      local default_opts = { noremap = true, silent = true }
-      map('n', '<leader>n', ':CHADopen<CR>', default_opts)
-    end
   }
   use {
     'neovim/nvim-lspconfig'
@@ -64,7 +59,10 @@ return require('packer').startup(function()
   }
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
-  use 'fatih/vim-go'
+  use {
+    'fatih/vim-go',
+    config = function() vim.cmd([[let g:go_doc_keywordprg_enabled = 0]]) end
+  }
   use {
   'nvim-lualine/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
