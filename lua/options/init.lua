@@ -25,6 +25,8 @@ opt.softtabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.smartindent = true
+opt.splitright = true
+opt.splitbelow = true
 cmd([[
 filetype indent plugin on
 syntax enable

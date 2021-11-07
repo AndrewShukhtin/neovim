@@ -39,13 +39,16 @@ return require('packer').startup(function()
     requires = { {'nvim-lua/plenary.nvim'} },
     config = function() require'telescope'.setup {} end
   }
+
   use {
     'ms-jpq/chadtree', branch = 'chad',
     run = 'python3 -m chadtree deps',
   }
+
   use {
     'neovim/nvim-lspconfig'
   }
+  
   use {
     'hrsh7th/nvim-cmp', -- Autocompletion plugin
     requires = {
@@ -56,6 +59,11 @@ return require('packer').startup(function()
       { 'hrsh7th/vim-vsnip' },
     }
   }
+  
+  use {
+    'williamboman/nvim-lsp-installer'
+  }
+
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use {
@@ -155,9 +163,17 @@ return require('packer').startup(function()
   end
 }
 
-use {
-  'tpope/vim-fugitive'
-}
+  use {
+    'tpope/vim-fugitive'
+  }
+
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
+
   -- ==================================================================
   -- +++++++++++++++++++++++ EXPERIMENTAL +++++++++++++++++++++++++++++
   -- ==================================================================
@@ -166,8 +182,12 @@ use {
   --   'akinsho/bufferline.nvim',
   --   requires = 'kyazdani42/nvim-web-devicons'
   -- }
---  use {
---    'romgrk/barbar.nvim',
---    requires = {'kyazdani42/nvim-web-devicons'}
---  }
+  -- use {
+  --   'romgrk/barbar.nvim',
+  --   requires = {'kyazdani42/nvim-web-devicons'}
+  -- }
+
+  use {
+    'mhinz/vim-startify'
+  }
 end)
