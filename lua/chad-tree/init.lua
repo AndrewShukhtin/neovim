@@ -18,5 +18,4 @@ local chadtree_settings = {
 }
 
 vim.api.nvim_set_var('chadtree_settings', chadtree_settings)
--- print(vim.inspect(vim.api.nvim_get_var('chadtree_settings')))
 
