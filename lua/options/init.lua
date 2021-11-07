@@ -3,8 +3,6 @@ local exec = vim.api.nvim_exec
 local g = vim.g
 local opt = vim.opt
 
--- g.indentLine_char = ':'
-
 opt.swapfile = false
 opt.backup = false
 opt.hidden = true
