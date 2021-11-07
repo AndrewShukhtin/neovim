@@ -1,0 +1,1 @@
+## My weird Neovim setup
