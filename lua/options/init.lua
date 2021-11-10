@@ -34,3 +34,6 @@ syntax enable
 cmd [[
 autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja setlocal shiftwidth=2 tabstop=2
 ]]
+cmd [[
+autocmd FileType go set number relativenumber signcolumn=yes
+]]
