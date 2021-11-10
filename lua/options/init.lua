@@ -28,11 +28,15 @@ opt.splitbelow = true
 cmd([[
 filetype indent plugin on
 syntax enable
+set number
+set relativenumber
+set signcolumn=yes
 ]])
 
 -- 2 spaces for selected filetypes
 cmd [[
 autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja setlocal shiftwidth=2 tabstop=2
+autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja set number relativenumber signcolumn=yes 
 ]]
 cmd [[
 autocmd FileType go set number relativenumber signcolumn=yes
