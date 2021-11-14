@@ -52,6 +52,27 @@ local border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
+  formatting = {
+    format = function(entry, vim_item)
+        -- fancy icons and a name of kind
+        vim_item.kind = require("lspkind").presets.default[vim_item.kind] ..
+                            " " .. vim_item.kind
+        -- set a name for each source
+        vim_item.menu = ({
+            buffer = "[Buffer]",
+            nvim_lsp = "[LSP]",
+            ultisnips = "[UltiSnips]",
+            nvim_lua = "[Lua]",
+            cmp_tabnine = "[TabNine]",
+            look = "[Look]",
+            path = "[Path]",
+            spell = "[Spell]",
+            calc = "[Calc]",
+            emoji = "[Emoji]"
+        })[entry.source.name]
+        return vim_item
+    end
+    },
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
@@ -95,7 +116,10 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'vsnip' },
     { name = 'path' },
+    { name = 'nvim_lua' },
+    { name = 'ultisnips' },
   },
+  completion = {completeopt = 'menu,menuone,noinsert'}
 }
 
 -- ===============================================
