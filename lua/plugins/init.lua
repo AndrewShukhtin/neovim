@@ -124,4 +124,12 @@ return require('packer').startup(function()
   use {
     'mhinz/vim-startify'
   }
+
+  use {
+    'tpope/vim-dadbod'
+  }
+
+  use {
+    "akinsho/toggleterm.nvim",
+  }
 end)

@@ -47,6 +47,8 @@ vim.o.completeopt = 'menuone,noselect'
 -- luasnip setup
 local luasnip = require 'luasnip'
 
+local border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
@@ -86,7 +88,7 @@ cmp.setup {
     end,
   },
   documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    border = border
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -99,44 +101,46 @@ cmp.setup {
 -- ===============================================
 -- ++++++++++++++++ GO +++++++++++++++++++++++++++
 -- ===============================================
-
-function goimports(timeout_ms)
-    local context = { only = { "source.organizeImports" } }
-    vim.validate { context = { context, "t", true } }
-
-    local params = vim.lsp.util.make_range_params()
-    params.context = context
-
-    -- See the implementation of the textDocument/codeAction callback
-    -- (lua/vim/lsp/handler.lua) for how to do this properly.
-    local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
-    if not result or next(result) == nil then return end
-    local actions = result[1].result
-    if not actions then return end
-    local action = actions[1]
-
-    -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
-    -- is a CodeAction, it can have either an edit, a command or both. Edits
-    -- should be executed first.
-    if action.edit or type(action.command) == "table" then
-      if action.edit then
-        vim.lsp.util.apply_workspace_edit(action.edit)
-      end
-      if type(action.command) == "table" then
-        vim.lsp.buf.execute_command(action.command)
-      end
-    else
-      vim.lsp.buf.execute_command(action)
-    end
-  end
-
-vim.api.nvim_command([[autocmd BufWritePre *.go lua goimports(1000)]])
-
+-- FIXME(a.shukhtin): vim-go already use autofmt after wq;
+-- Mb i should delete this code, but not yet
+--
+-- function goimports(timeout_ms)
+--     local context = { only = { "source.organizeImports" } }
+--     vim.validate { context = { context, "t", true } }
+--
+--     local params = vim.lsp.util.make_range_params()
+--     params.context = context
+--
+--     -- See the implementation of the textDocument/codeAction callback
+--     -- (lua/vim/lsp/handler.lua) for how to do this properly.
+--     local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, timeout_ms)
+--     if not result or next(result) == nil then return end
+--     local actions = result[1].result
+--     if not actions then return end
+--     local action = actions[1]
+--
+--     -- textDocument/codeAction can return either Command[] or CodeAction[]. If it
+--     -- is a CodeAction, it can have either an edit, a command or both. Edits
+--     -- should be executed first.
+--     if action.edit or type(action.command) == "table" then
+--       if action.edit then
+--         vim.lsp.util.apply_workspace_edit(action.edit)
+--       end
+--       if type(action.command) == "table" then
+--         vim.lsp.buf.execute_command(action.command)
+--       end
+--     else
+--       vim.lsp.buf.execute_command(action)
+--     end
+--   end
+--
+-- vim.api.nvim_command([[autocmd BufWritePre *.go lua goimports(1000)]])
+--
 
 -- ==============================================
 -- ++++++++++++++++++ LUA +++++++++++++++++++++++
 -- ==============================================
---
+
 local lua_config = {
   settings = {
     Lua = {
@@ -156,7 +160,19 @@ local lua_config = {
   },
 }
 
--- LSP settings
+
+-- ==============================================
+-- ++++++++++++++++++ LSP +++++++++++++++++++++++
+-- ==============================================
+
+vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
+vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+
+local handlers =  {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+}
+
 local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.on_server_ready(function(server)
     local opts = {
@@ -164,7 +180,8 @@ lsp_installer.on_server_ready(function(server)
       on_attach = on_attach,
       flags = {
         debounce_text_changes = 150,
-      }
+      },
+      handlers = handlers 
     }
     if server.name == "sumneko_lua" then
         -- only apply these settings for the "sumneko_lua" server
@@ -172,3 +189,37 @@ lsp_installer.on_server_ready(function(server)
     end
     server:setup(opts)
 end)
+
+local M = {}
+
+M.icons = {
+  Class = " ",
+  Color = " ",
+  Constant = " ",
+  Constructor = " ",
+  Enum = "了 ",
+  EnumMember = " ",
+  Field = " ",
+  File = " ",
+  Folder = " ",
+  Function = " ",
+  Interface = "ﰮ ",
+  Keyword = " ",
+  Method = "ƒ ",
+  Module = " ",
+  Property = " ",
+  Snippet = "﬌ ",
+  Struct = " ",
+  Text = " ",
+  Unit = " ",
+  Value = " ",
+  Variable = " ",
+}
+
+function M.setup()
+  local kinds = vim.lsp.protocol.CompletionItemKind
+  for i, kind in ipairs(kinds) do
+    kinds[i] = M.icons[kind] or kind
+  end
+end
+

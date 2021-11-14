@@ -4,7 +4,7 @@ require('keymaps')
 require('chad-tree')
 require('lsp')
 require('git-signs')
-
+require('toggle-term')
 -- ===================================
 -- ++++++++++ EXPERIMENTAL +++++++++++
 -- ===================================
