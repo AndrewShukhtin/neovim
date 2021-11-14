@@ -16,8 +16,9 @@ map('c', '<leader>]', ':tabnext<CR>', default_opts)
 map('n', '<leader>[', ':tabprev<CR>', default_opts)
 map('c', '<leader>[', ':tabprev<CR>', default_opts)
 
-map('n', 'ps', ":lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For >  \" )})<CR>", default_opts)
-
 map('i', '<S-TAB>', '<C-d>', default_opts)
 map('v', '<S-TAB>', '<<', default_opts)
 map('n', '<S-j>', '<nop>', default_opts)
+
+map('n', '<leader>ff', "<cmd> lua require('telescope.builtin').find_files()<cr>", default_opts)
+map('n', '<leader>fg', "<cmd> lua require('telescope.builtin').live_grep()<cr>", default_opts)
