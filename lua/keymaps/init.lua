@@ -20,4 +20,4 @@ map('n', 'ps', ":lua require('telescope.builtin').grep_string({ search = vim.fn.
 
 map('i', '<S-TAB>', '<C-d>', default_opts)
 map('v', '<S-TAB>', '<<', default_opts)
-
+map('n', '<S-j>', '<nop>', default_opts)
