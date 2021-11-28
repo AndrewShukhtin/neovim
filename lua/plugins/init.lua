@@ -25,7 +25,7 @@ return require('packer').startup(function()
   -- Packer сам себя 
   use 'wbthomason/packer.nvim'
 
-  -- Устанавливаем тему и цвутовую схему
+  -- Setting up colorscheme
   use {
     'dracula/vim',
     config = function()
@@ -33,17 +33,23 @@ return require('packer').startup(function()
       vim.cmd'colorscheme dracula'
     end
   }
-  -- Telescope
+
+  -- Telescope setup
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} },
     config = function() require'telescope'.setup {} end
   }
 
+  -- CHADTree - like NERDTree but better
   use {
     'ms-jpq/chadtree', branch = 'chad',
     run = 'python3 -m chadtree deps',
   }
+
+  -- ============================================
+  -- ++++++++++++++++++ LSP +++++++++++++++++++++
+  -- ============================================
 
   use {
     'neovim/nvim-lspconfig'
@@ -85,20 +91,13 @@ return require('packer').startup(function()
         end)
     end
   }
+
   use {
   'nvim-lualine/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function() require'lualine'.setup {} end,
   }
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    config = function() require'nvim-treesitter.configs'.setup {
-      ensure_installed = "maintained",
-      highlight = {
-        enable = true,
-      }
-    } end
-  }
+  
 
   -- ============================================
   -- ++++++++++++++++++ GIT +++++++++++++++++++++
@@ -135,6 +134,21 @@ return require('packer').startup(function()
   --   requires = {'kyazdani42/nvim-web-devicons'}
   -- }
 
+  -- NOTE: treesitter is experimental unsatable tool!
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    config = function() require'nvim-treesitter.configs'.setup {
+      ensure_installed = "maintained",
+      highlight = {
+        enable = true,
+      }
+    } end
+  }
+
+  use {
+    'jjo/vim-cue'
+  }
+
   use {
     'mhinz/vim-startify'
   }
@@ -145,5 +159,15 @@ return require('packer').startup(function()
 
   use {
     "akinsho/toggleterm.nvim",
+  }
+
+  use {
+    'steelsojka/pears.nvim',
+    config = function ()
+      require'pears'.setup(function (conf)
+        conf.pair("{", "}")
+        conf.expand_on_enter(false)
+      end)
+    end
   }
 end)

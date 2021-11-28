@@ -36,8 +36,11 @@ set signcolumn=yes
 -- 2 spaces for selected filetypes
 cmd [[
 autocmd FileType json,xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja,proto setlocal shiftwidth=2 tabstop=2
-autocmd FileType json,xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja,proto set number relativenumber signcolumn=yes 
+autocmd FileType json,xml,html,xhtml,css,scss,javascript,lua,yaml,htmljinja,proto,cue set number relativenumber signcolumn=yes
 ]]
 cmd [[
 autocmd FileType go set number relativenumber signcolumn=yes
 ]]
+
+g.relativenumber = true
+g.signcolumn = 'yes'
