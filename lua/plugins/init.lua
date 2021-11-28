@@ -67,9 +67,23 @@ return require('packer').startup(function()
 
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  -- use {
+  --   'fatih/vim-go',
+  --   config = function() vim.cmd([[let g:go_doc_keywordprg_enabled = 0]]) end
+  -- }
+  -- NOTE: explore other golang helper
   use {
-    'fatih/vim-go',
-    config = function() vim.cmd([[let g:go_doc_keywordprg_enabled = 0]]) end
+    'crispgm/nvim-go',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-lua/popup.nvim'
+    },
+    config = function()
+      require'go'.setup({})
+      require('go').config.update_tool('quicktype', function(tool)
+        tool.pkg_mgr = 'npm'
+        end)
+    end
   }
   use {
   'nvim-lualine/lualine.nvim',
@@ -85,7 +99,6 @@ return require('packer').startup(function()
       }
     } end
   }
-
 
   -- ============================================
   -- ++++++++++++++++++ GIT +++++++++++++++++++++

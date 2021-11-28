@@ -22,3 +22,5 @@ map('n', '<S-j>', '<nop>', default_opts)
 
 map('n', '<leader>ff', "<cmd> lua require('telescope.builtin').find_files()<cr>", default_opts)
 map('n', '<leader>fg', "<cmd> lua require('telescope.builtin').live_grep()<cr>", default_opts)
+
+map('n', '<leader>tt', "<cmd> ToggleTerm<cr>", default_opts)

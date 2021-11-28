@@ -205,11 +205,11 @@ lsp_installer.on_server_ready(function(server)
       flags = {
         debounce_text_changes = 150,
       },
-      handlers = handlers 
+      handlers = handlers
     }
     if server.name == "sumneko_lua" then
         -- only apply these settings for the "sumneko_lua" server
-        opts.settings = lua_config.settings 
+        opts.settings = lua_config.settings
     end
     server:setup(opts)
 end)
