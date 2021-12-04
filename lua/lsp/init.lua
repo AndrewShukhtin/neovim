@@ -4,6 +4,44 @@
 
 local nvim_lsp = require('lspconfig')
 
+local border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+
+-- rename in popup
+local function dorename(win)
+  local new_name = vim.trim(vim.fn.getline('.'))
+  vim.api.nvim_win_close(win, true)
+  vim.lsp.buf.rename(new_name)
+end
+
+local function rename()
+  local opts = {
+    relative = 'cursor',
+    row = 0,
+    col = 0,
+    width = 30,
+    height = 1,
+    style = 'minimal',
+    border = border
+  }
+  local map_opts = {silent=true, noremap=true}
+  local cword = vim.fn.expand('<cword>')
+  local buf = vim.api.nvim_create_buf(false, true)
+  local win = vim.api.nvim_open_win(buf, true, opts)
+  local fmt =  '<cmd>lua Rename.dorename(%d)<CR>'
+
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, {cword})
+  vim.api.nvim_buf_set_keymap(buf, 'i', '<CR>', string.format(fmt, win), map_opts)
+  vim.api.nvim_buf_set_keymap(buf, 'i', '<esc>', '<CMD>stopinsert<CR>', map_opts)
+  vim.api.nvim_buf_set_keymap(buf, 'n', '<esc>', '<CMD>q!<CR>', map_opts)
+end
+
+_G.Rename = {
+   rename = rename,
+   dorename = dorename
+}
+
+-- vim.api.nvim_set_keymap('n', '<leader>gr', '<cmd>lua Rename.rename()<CR>', {silent = true})
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -28,7 +66,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
   buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<leader>rn', '<cmd>lua Rename.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
@@ -63,7 +101,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- luasnip setup
 local luasnip = require 'luasnip'
 
-local border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -251,4 +288,21 @@ function M.setup()
     kinds[i] = M.icons[kind] or kind
   end
 end
+
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
+    local opts = {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      flags = {
+        debounce_text_changes = 150,
+      },
+      handlers = handlers
+    }
+    if server.name == "sumneko_lua" then
+        -- only apply these settings for the "sumneko_lua" server
+        opts.settings = lua_config.settings
+    end
+    server:setup(opts)
+end)
 
