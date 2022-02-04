@@ -65,6 +65,7 @@ local v_opts = {
 }
 
 local n_mappings = {
+  a = {"<cmd>Alpha<cr>", "Alpha"},
   q = {":q<cr>", "Quit"},
   Q = {":wq<cr>", "Save & Quit"},
   w = {":w<cr>", "Save"},
