@@ -49,9 +49,9 @@ packer.startup(function(use)
 }
   -- Advance syntax highlighting
   use {'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", config = "require('treesitter-config')"}
+  use {'p00f/nvim-ts-rainbow'}
 
   -- Brackets behavior
-  use {'p00f/nvim-ts-rainbow'}
   use {'windwp/nvim-autopairs', config = "require('autopairs-config')"}
 
   -- Show keybindings
