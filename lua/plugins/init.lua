@@ -128,6 +128,12 @@ packer.startup(function(use)
 
 	use({ "tami5/lspsaga.nvim", branch = "nvim6.0", config = "require('lspsaga-config')" })
 
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		ft = "markdown",
+	})
+
 	-- =================================================================================
 	-- TODO: check this plugins
 	-- =================================================================================
