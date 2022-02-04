@@ -82,7 +82,7 @@ packer.startup(function(use)
   use {'L3MON4D3/LuaSnip'}
 
   -- Git
-  use {'lewis6991/gitsigns.nvim', config = "require('gitsigns').setup{}"}
+  use {'lewis6991/gitsigns.nvim', config = "require('gitsigns-config')"}
 
   -- Dashboard
   -- use {'glepnir/dashboard-nvim', config = "require('dashboard-config')"}
