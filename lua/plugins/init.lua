@@ -76,12 +76,15 @@ packer.startup(function(use)
   use {'neovim/nvim-lspconfig', config = "require('lsp')"}
   use {'williamboman/nvim-lsp-installer'}
   use {'hrsh7th/nvim-cmp'}
+  use {"hrsh7th/cmp-path"}
   use {'hrsh7th/cmp-nvim-lsp'}
   use {'hrsh7th/cmp-buffer'}
   use {'hrsh7th/cmp-vsnip'}
   use {'hrsh7th/vim-vsnip'}
   use {'onsails/lspkind-nvim'}
+  use {"hrsh7th/cmp-nvim-lua"}
   use {'saadparwaiz1/cmp_luasnip'}
+  use {"rafamadriz/friendly-snippets"}
   use {'L3MON4D3/LuaSnip'}
 
   -- Git
