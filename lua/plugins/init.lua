@@ -66,6 +66,9 @@ packer.startup(function(use)
   -- Bufferlines
   use {'akinsho/bufferline.nvim', requires = 'kyazdani42/nvim-web-devicons', config = "require('bufferline-config')"}
 
+  -- Bbye allows you to do delete buffers (close files) without closing your windows or messing up your layout
+  use {'moll/vim-bbye'}
+
   -- File tree
   use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons', config = "require('nvimtree-config')"}
 
