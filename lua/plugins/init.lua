@@ -86,6 +86,7 @@ packer.startup(function(use)
   use {'saadparwaiz1/cmp_luasnip'}
   use {"rafamadriz/friendly-snippets"}
   use {'L3MON4D3/LuaSnip'}
+  use {"ray-x/lsp_signature.nvim"}
 
   -- Git
   use {'lewis6991/gitsigns.nvim', config = "require('gitsigns-config')"}
