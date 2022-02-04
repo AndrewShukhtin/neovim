@@ -1,9 +1,9 @@
-vim.cmd('filetype plugin indent on')
-vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.cmd("filetype plugin indent on")
+vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.hidden = true
-vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+vim.o.whichwrap = "b,s,<,>,[,],h,l"
 vim.o.pumheight = 20
-vim.o.fileencoding = 'utf-8'
+vim.o.fileencoding = "utf-8"
 vim.o.cmdheight = 2
 vim.opt.termguicolors = true
 vim.o.splitright = true
@@ -15,7 +15,7 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.updatetime = 300
 vim.o.timeoutlen = 100
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = "unnamedplus"
 vim.o.hlsearch = false
 vim.o.ignorecase = true
 vim.o.scrolloff = 3
@@ -47,7 +47,7 @@ vim.g.loaded_logiPat = 1
 vim.g.loaded_rrhelper = 1
 vim.g.loaded_tarPlugin = 1
 vim.g.loaded_gzip = 1
-vim.g.loaded_zipPlugin  =1
+vim.g.loaded_zipPlugin = 1
 vim.g.loaded_2html_plugin = 1
 vim.g.loaded_shada_plugin = 1
 vim.g.loaded_spelfile_plugin = 1
