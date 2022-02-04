@@ -83,6 +83,7 @@ packer.startup(function(use)
 
   -- Git
   use {'lewis6991/gitsigns.nvim', config = "require('gitsigns-config')"}
+  use {'f-person/git-blame.nvim', config = "require('gitblame-config')"}
 
   -- Dashboard
   -- use {'glepnir/dashboard-nvim', config = "require('dashboard-config')"}
