@@ -12,6 +12,10 @@ map("n", "<C-k>", "<C-w>k", { noremap = true, silent = false })
 map("i", "jk", "<ESC>", { noremap = true, silent = true })
 map("i", "kj", "<ESC>", { noremap = true, silent = true })
 
+-- Map jk or kj to escape from insert mode
+map("i", "ло", "<ESC>", { noremap = true, silent = true })
+map("i", "ол", "<ESC>", { noremap = true, silent = true })
+
 -- Makes indentation better
 map("v", "<", "<gv", { noremap = true, silent = false })
 map("v", ">", ">gv", { noremap = true, silent = false })
