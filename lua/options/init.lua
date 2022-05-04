@@ -15,10 +15,11 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.updatetime = 300
 vim.o.timeoutlen = 100
-vim.o.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
+vim.opt.colorcolumn = '120'
 vim.o.hlsearch = false
 vim.o.ignorecase = true
-vim.o.scrolloff = 3
+vim.o.scrolloff = 7
 vim.o.sidescrolloff = 5
 vim.o.mouse = "a"
 vim.opt.list = true
@@ -55,3 +56,6 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_remote_plugins = 1
+
+vim.opt.langmap = "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
+
