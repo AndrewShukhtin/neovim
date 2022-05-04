@@ -10,6 +10,7 @@ null_ls.setup({
 	sources = {
 		formatting.prettier,
 		formatting.gofmt,
+		formatting.goimports,
 		formatting.shfmt,
 		formatting.stylua,
 		formatting.codespell.with({ filetypes = { "markdown" } }),
