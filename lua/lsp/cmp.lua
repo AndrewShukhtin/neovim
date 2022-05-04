@@ -92,9 +92,15 @@ cmp.setup({
       "s",
     }),
 	},
-	documentation = {
-		border = border,
-	},
+	-- documentation = {
+	-- 	border = border,
+	-- },
+  window = {
+    -- documentation = "native",
+    documentation = {
+      border = border,
+    },
+  },
 	sources = {
 		{ name = "nvim_lsp" }, -- For vsnip user.
 		{ name = "vsnip" }, -- For luasnip user.
