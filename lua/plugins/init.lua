@@ -197,9 +197,5 @@ packer.startup(function(use)
   --
   -- use {"rcarriga/nvim-notify"}
   --
-  -- use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-  --
-  -- use {"filipdutescu/renamer.nvim"}
-  --
   -- use {"ray-x/lsp_signature.nvim"} -- signature help plugin
 end)
