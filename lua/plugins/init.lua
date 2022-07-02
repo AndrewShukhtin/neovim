@@ -178,7 +178,7 @@ packer.startup(function(use)
   use({
     "rcarriga/nvim-dap-ui",
     requires = { "mfussenegger/nvim-dap" },
-    config = "require('dapui').setup()",
+    config = "require('dapui-config')",
   })
 
   -- use ({'ray-x/go.nvim', config = "require('go').setup()"})
