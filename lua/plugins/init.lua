@@ -38,17 +38,13 @@ packer.startup(function(use)
 	-- Packer it self
 	use({ "wbthomason/packer.nvim" })
 
-	-- Colorscheme
-	-- use {'rose-pine/neovim', as = 'rose-pine', config = function()
-	--       vim.cmd('colorscheme rose-pine')
-	--   end
-	-- }
 	use({
-		"folke/tokyonight.nvim",
+		"ray-x/starry.nvim",
 		config = function()
-			vim.cmd("colorscheme tokyonight")
+			vim.cmd("colorscheme dracula")
 		end,
 	})
+
 	-- Advance syntax highlighting
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = "require('treesitter-config')" })
 	use({ "p00f/nvim-ts-rainbow" })
@@ -128,11 +124,13 @@ packer.startup(function(use)
 
 	use({ "tami5/lspsaga.nvim", branch = "nvim6.0", config = "require('lspsaga-config')" })
 
-	use({
-		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		ft = "markdown",
-	})
+  -- NOTE: unstable plugin :(
+	-- use({
+	-- 	"iamcco/markdown-preview.nvim",
+	-- 	run = "cd app && npm install",
+	-- 	ft = "markdown",
+	-- })
+  --
 
 	-- =================================================================================
 	-- TODO: check this plugins
