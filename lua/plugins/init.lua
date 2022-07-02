@@ -181,7 +181,11 @@ packer.startup(function(use)
     config = "require('dapui-config')",
   })
 
-  -- use ({'ray-x/go.nvim', config = "require('go').setup()"})
+  use({
+    'ray-x/go.nvim',
+    branch = "nvim_0_7",
+    config = "require('go-config')"
+  })
 
   -- =================================================================================
   -- TODO: check this plugins
