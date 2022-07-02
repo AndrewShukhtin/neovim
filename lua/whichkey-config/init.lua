@@ -42,7 +42,34 @@ local toggle_float = function()
   return float:toggle()
 end
 local toggle_lazygit = function()
-  local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
+  local lazygit = Terminal:new({
+    cmd = "lazygit",
+    dir = "git_dir",
+    direction = "float",
+    float_opts = {
+      border = "double",
+    },
+    -- function to run on opening the terminal
+    on_open = function(term)
+      vim.cmd("startinsert!")
+      local opts = {noremap = true}
+      vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[]], opts)
+      vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+    end,
+    -- function to run on closing the terminal
+    on_close = function(term)
+      local opts = {noremap = true}
+      vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+    end,
+  })
   return lazygit:toggle()
 end
 
@@ -80,8 +107,16 @@ local n_mappings = {
     o = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
   },
   t = {
-    t = { ":ToggleTerm<cr>", "Split Below" },
-    f = { toggle_float, "Floating Terminal" },
+    name = "Terminal",
+    ["1"] = { ":1ToggleTerm size=14<cr>", "#1" },
+    ["2"] = { ":2ToggleTerm size=14<cr>", "#2" },
+    ["3"] = { ":3ToggleTerm size=14<cr>", "#3" },
+    ["4"] = { ":4ToggleTerm size=14<cr>", "#4" },
+    ["f1"] = { "<cmd>1ToggleTerm direction=float<cr>", "Floating Terminal #1" },
+    ["f2"] = { "<cmd>2ToggleTerm direction=float<cr>", "Floating Terminal #2" },
+    ["f3"] = { "<cmd>1ToggleTerm direction=float<cr>", "Floating Terminal #3" },
+    ["f4"] = { "<cmd>2ToggleTerm direction=float<cr>", "Floating Terminal #4" },
+    v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
   l = {
     name = "LSP",
