@@ -126,8 +126,6 @@ packer.startup(function(use)
     config = "require('gitblame-config')"
   })
 
-  -- Dashboard
-  -- use {'glepnir/dashboard-nvim', config = "require('dashboard-config')"}
   use({
     "goolord/alpha-nvim",
     config = "require('dashboard-config')"
