@@ -12,7 +12,6 @@ null_ls.setup({
     formatting.gofmt,
     formatting.goimports,
     formatting.shfmt,
-    formatting.stylua,
     formatting.codespell.with({ filetypes = { "markdown" } }),
   },
 })
