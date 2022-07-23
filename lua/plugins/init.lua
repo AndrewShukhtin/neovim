@@ -82,7 +82,7 @@ packer.startup(function(use)
   -- Bufferlines
   use({
     "akinsho/bufferline.nvim",
-    tag="v2.*",
+    tag = "v2.*",
     requires = "kyazdani42/nvim-web-devicons",
     config = "require('bufferline-config')",
   })
