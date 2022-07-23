@@ -40,3 +40,9 @@ map("x", "J", ":move '>+1<CR>gv-gv", { noremap = true, silent = true })
 map("x", "K", ":move '<-2<CR>gv-gv", { noremap = true, silent = true })
 map("x", "<A-j>", ":move '>+1<CR>gv-gv", { noremap = true, silent = true })
 map("x", "<A-k>", ":move '<-2<CR>gv-gv", { noremap = true, silent = true })
+
+-- Resize with arrows
+map("n", "<C-Up>", ":resize -2<CR>", { noremap = true, silent = true })
+map("n", "<C-Down>", ":resize +2<CR>", { noremap = true, silent = true })
+map("n", "<C-Left>", ":vertical resize -2<CR>", { noremap = true, silent = true })
+map("n", "<C-Right", ":vertical resize +2<CR>", { noremap = true, silent = true })
