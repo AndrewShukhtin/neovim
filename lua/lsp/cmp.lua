@@ -92,9 +92,6 @@ cmp.setup({
       "s",
     }),
   },
-  -- documentation = {
-  -- 	border = border,
-  -- },
   window = {
     -- documentation = "native",
     documentation = {
@@ -109,6 +106,6 @@ cmp.setup({
     { name = "vsnip" },
     { name = "path" },
     { name = "nvim_lua" },
-    { name = "ultisnips" },
+    -- { name = "ultisnips" },
   },
 })
