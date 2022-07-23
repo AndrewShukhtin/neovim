@@ -8,9 +8,9 @@
 
 ![references](./assets/references.png "References")
 
-![lazy-git](./assets/lazy-git.png "Lazygit")
+![references](./assets/rename.png "Rename")
 
-![checkout_commit](./assets/checkout_commit.png "Checkout commit")
+![lazy-git](./assets/lazygit.png "Lazygit")
 
 ![which-key](./assets/which_key.png "Which key")
 
