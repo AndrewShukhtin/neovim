@@ -53,7 +53,7 @@ local toggle_lazygit = function()
     on_open = function(term)
       vim.cmd("startinsert!")
       local opts = {noremap = true}
-      vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[]], opts)
+      -- vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[]], opts)
@@ -63,7 +63,7 @@ local toggle_lazygit = function()
     -- function to run on closing the terminal
     on_close = function(term)
       local opts = {noremap = true}
-      vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+      -- vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
       vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
