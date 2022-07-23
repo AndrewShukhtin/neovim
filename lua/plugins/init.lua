@@ -157,6 +157,16 @@ packer.startup(function(use)
   --   config = "require('renamer-config')"
   -- }
 
+  use {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
   use({
     "tami5/lspsaga.nvim",
     branch = "nvim6.0",
