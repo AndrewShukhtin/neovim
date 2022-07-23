@@ -99,6 +99,9 @@ local n_mappings = {
   x = { "<cmd>Bdelete!<cr>", "Close Buffer" },
   E = { ":e ~/.config/nvim/init.lua<cr>", "Edit Config File" },
   e = { ":NvimTreeToggle<cr>", "Open File Explorer" },
+  c = {
+    l = { "<Cmd>set operatorfunc=CommentOperator<CR>g@l", "Comment line" },
+  },
   f = {
     name = "Telescope",
     f = { "<cmd>Telescope find_files<cr>", "Find Files" },
@@ -171,6 +174,10 @@ local v_mappings = {
       '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<cr>',
       "Reset hunk",
     },
+  },
+  c = {
+    ":<C-u>call CommentOperator(visualmode())<CR>",
+    "Comment lines",
   },
 }
 
