@@ -21,6 +21,7 @@ end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
+-- NOTE(apshukhtin): old version of 'has_words_before'
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
@@ -72,7 +73,8 @@ cmp.setup({
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      elseif check_backspace() then
+      elseif has_words_before() then
+        -- cmp.complete()
         fallback()
       else
         fallback()
