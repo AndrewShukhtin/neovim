@@ -1,4 +1,8 @@
-local wk = require("which-key")
+local ok, wk = pcall(require, "which-key")
+if not ok then
+  return
+end
+
 wk.setup({
   plugins = {
     marks = false,
@@ -36,11 +40,13 @@ wk.setup({
   },
 })
 
-local Terminal = require("toggleterm.terminal").Terminal
-local toggle_float = function()
-  local float = Terminal:new({ direction = "float" })
-  return float:toggle()
+local toggleterm_ok, toggleterm_terminal = pcall(require, "toggleterm.terminal")
+if not toggleterm_ok then
+  return
 end
+
+local Terminal = toggleterm_terminal.Terminal
+
 local toggle_lazygit = function()
   local lazygit = Terminal:new({
     cmd = "lazygit",
