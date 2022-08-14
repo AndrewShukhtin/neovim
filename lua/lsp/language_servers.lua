@@ -23,6 +23,7 @@ local lua_config = {
   },
 }
 
+-- TODO(apshukhtin): replace usage of this deprecated method
 lsp_installer.on_server_ready(function(server)
   local opts = {
     capabilities = require("lsp.handlers").capabilities,
