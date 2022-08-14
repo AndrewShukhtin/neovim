@@ -38,10 +38,20 @@ packer.startup(function(use)
   -- Packer it self
   use({ "wbthomason/packer.nvim" })
 
+  -- Colorschemes
+  -- use({
+  --   "ray-x/starry.nvim",
+  --   config = function()
+  --     vim.cmd("colorscheme dracula")
+  --   end,
+  -- })
+
   use({
-    "ray-x/starry.nvim",
+    "rose-pine/neovim",
+    as = 'rose-pine',
+    tag = 'v1.*',
     config = function()
-      vim.cmd("colorscheme dracula")
+      vim.cmd("colorscheme rose-pine")
     end,
   })
 
