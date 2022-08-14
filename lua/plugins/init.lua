@@ -46,12 +46,19 @@ packer.startup(function(use)
   --   end,
   -- })
 
+  -- use({
+  --   "rose-pine/neovim",
+  --   as = 'rose-pine',
+  --   tag = 'v1.*',
+  --   config = function()
+  --     vim.cmd("colorscheme rose-pine")
+  --   end,
+  -- })
+
   use({
-    "rose-pine/neovim",
-    as = 'rose-pine',
-    tag = 'v1.*',
+    "EdenEast/nightfox.nvim",
     config = function()
-      vim.cmd("colorscheme rose-pine")
+      vim.cmd("colorscheme carbonfox")
     end,
   })
 
