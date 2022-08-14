@@ -7,8 +7,12 @@ end
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
+
 -- Setup nvim-cmp.
-local cmp = require("cmp")
+local ok, cmp = require("cmp")
+if not ok then
+  return
+end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
@@ -21,8 +25,6 @@ local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
-
-local border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
 
 cmp.setup({
   formatting = {
@@ -95,15 +97,19 @@ cmp.setup({
   window = {
     -- documentation = "native",
     documentation = {
-      border = border,
+      border = "rounded",
+      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
     },
+    completion = {
+      border = "rounded",
+      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+    }
   },
   sources = {
-    { name = "nvim_lsp" }, -- For vsnip user.
-    { name = "vsnip" }, -- For luasnip user.
+    { name = "nvim_lsp" },
+    -- { name = "vsnip" }, -- For vsnip user.
     { name = "buffer" },
     { name = "luasnip" },
-    { name = "vsnip" },
     { name = "path" },
     { name = "nvim_lua" },
     -- { name = "ultisnips" },
