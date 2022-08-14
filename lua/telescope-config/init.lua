@@ -1,4 +1,8 @@
-local actions = require("telescope.actions")
+local ok, actions = pcall(require, "telescope.actions")
+if not ok then
+  return
+end
+
 require("telescope").setup({
   defaults = {
     layout_config = {
