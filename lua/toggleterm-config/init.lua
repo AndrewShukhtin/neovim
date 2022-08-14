@@ -1,4 +1,9 @@
-require("toggleterm").setup({
+local ok, toggleterm = pcall(require, "toggleterm")
+if not ok then
+  return
+end
+
+toggleterm.setup({
   size = 18,
   open_mapping = [[<c-\>]],
   shade_filetypes = {},
