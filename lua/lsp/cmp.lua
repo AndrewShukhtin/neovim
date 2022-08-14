@@ -9,7 +9,7 @@ local feedkey = function(key, mode)
 end
 
 -- Setup nvim-cmp.
-local ok, cmp = require("cmp")
+local ok, cmp = pcall(require, "cmp")
 if not ok then
   return
 end
