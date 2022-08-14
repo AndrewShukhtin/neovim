@@ -114,6 +114,8 @@ local n_mappings = {
     g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
     o = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
+    c = { "<cmd>Telescope commands<cr>", "Commands"},
+    ["hc"] = { "<cmd>Telescope command_history<cr>", "Command History"}
   },
   t = {
     name = "Terminal",
